@@ -1,4 +1,4 @@
-import {CLEAR_ERROR_FAILURE, CLEAR_ERROR_REQUEST, CLEAR_ERROR_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS} from '../../redux/types';
+import {CLEAR_ERROR_FAILURE, CLEAR_ERROR_REQUEST, CLEAR_ERROR_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE} from '../../redux/types';
 //store 에서 빈 값이었던 초기값을 여기서 정의해 줌.
 const initialState = {
     token: localStorage.getItem('token'),
@@ -14,6 +14,7 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
+        case LOGOUT_REQUEST:
         case LOGIN_REQUEST:
             return {
                 ...state,
@@ -32,6 +33,7 @@ const authReducer = (state = initialState, action) => {
                 errorMsg: ""
             }
         case LOGIN_FAILURE:
+        case LOGOUT_FAILURE:
             localStorage.removeItem('token')
             return {
                 ...state,
@@ -43,7 +45,18 @@ const authReducer = (state = initialState, action) => {
                 isLoading: false,
                 userRole: null,
                 errorMsg: action.payload.data.msg
-            }    
+            }   
+        case LOGOUT_SUCCESS:
+            localStorage.removeItem('token')
+            return {
+                token: null,
+                user: null,
+                userId: null,
+                isAuthenticated: false,
+                isLoading: false,
+                userRole: null,
+                errorMsg: ""
+            } 
         case CLEAR_ERROR_REQUEST:
             return {
                 ...state,
@@ -58,7 +71,8 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 errorMsg: null
-            }    
+            }
+         
         default:
             return state
     }
