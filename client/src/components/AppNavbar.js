@@ -1,10 +1,9 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { Container, Navbar, NavbarToggler, Collapse, Nav, NavItem, Form } from 'reactstrap';
+import { Container, Navbar, NavbarToggler, Collapse, Nav, NavItem, Form, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import LoginModal from '../components/auth/LoginModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOGOUT_REQUEST } from '../redux/types';
-import { Button } from 'bootstrap';
 import RegisterModal from './auth/RegisterModal';
 
 
