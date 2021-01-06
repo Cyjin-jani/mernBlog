@@ -57,7 +57,7 @@ const AppNavbar = ()=> {
                         </Link>
                     ): (
                         <Button outline color="light" className="px-3" block>
-                            <strong>"No USER"</strong>
+                            <strong>No USER</strong>
                         </Button>
                     )}
                 </Form>
